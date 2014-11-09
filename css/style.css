@@ -1,0 +1,27 @@
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
+    color: #000;  /*Sets the text hover color on navbar*/
+}
+
+.navbar-nav > .active > a {
+    color: white;
+    background-color: #0587C1 !important;
+}
+
+.navbar-default {
+    background-color: #00ADD9;
+    border-radius: 0;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    color: #262626;
+    background-color: #66CCFF;
+}
+
+.navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-brand {
+    color: #f4eef4 !important;
+}

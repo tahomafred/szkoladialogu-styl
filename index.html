@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/jssor.js"></script>
+    <script type="text/javascript" src="js/jssor.slider.js"></script>
+    <script>
+        var jssor_slider = "";
+        jQuery(document).ready(function ($) {
+            var options = {
+                $AutoPlay: true, $FillMode: 2,
+                $ThumbnailNavigatorOptions: {
+                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
+                    $ChanceToShow: 0,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $ActionMode: 0,                                 //[Optional] 0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
+                    $DisableDrag: true                              //[Optional] Disable drag or not, default value is false
+                }
+            };
+
+            if ($('#slider1_container').prop('display') != true) { // no display property
+                jssor_slider = new $JssorSlider$('slider1_container', options); // init the slider
+            }
+
+            function ScaleSlider() {
+
+                var paddingWidth = 30;
+
+                //minimum width should reserve for text
+                var minReserveWidth = 225;
+
+                var parentElement = jssor_slider.$Elmt.parentNode;
+
+                //evaluate parent container width
+                var parentWidth = parentElement.clientWidth;
+
+                if (parentWidth) {
+
+                    var availableWidth = parentWidth - paddingWidth;
+
+                    var sliderWidth = availableWidth;
+
+                    sliderWidth = Math.min(sliderWidth, 1140);
+
+                    sliderWidth = Math.max(sliderWidth, 400);
+                    var clearFix = "none";
+
+                    //evaluate free width for text, if the width is less than minReserveWidth then fill parent container
+                    if (availableWidth - sliderWidth < minReserveWidth) {
+
+                        //set slider width to available width
+                        sliderWidth = availableWidth;
+
+                        //slider width is minimum 200
+                        sliderWidth = Math.max(sliderWidth, 200);
+
+                        clearFix = "both";
+                    }
+
+                    //clear fix for safari 3.1, chrome 3
+                    $('#clearFixDiv').css('clear', clearFix);
+
+                    jssor_slider.$SetScaleWidth(sliderWidth);
+                }
+                else
+                    window.setTimeout(ScaleSlider, 30);
+            }
+
+            ScaleSlider();
+
+            if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+                $(window).bind('resize', ScaleSlider);
+            }
+        });
+    </script>
+
+</head>
+<body style="background-color: #EAEAEA;">
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Szkoła Dialogu</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Aktualności</a></li>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Informacje<span class="caret"></span></a>
+
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Historia Śremu</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Kultura polska</a></li>
+                        <li><a href="#">Kultura niemiecka</a></li>
+                        <li><a href="#">Kultura żydowska</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Religie</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Multimedia<span class="caret"></span></a>
+
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="">Zdjęcia</a></li>
+                        <li><a href="#">Filmy</a></li>
+                        <li><a href="#">Ciekawe linki</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">O nas<span class="caret"></span></a>
+
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="">Członkowie</a></li>
+                        <li><a href="#">Czym się zajmujemy?</a></li>
+                        <li><a href="#">A teraz przygotowujemy (?)</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div id="slider1_container" style="position: relative; top: 0; left: 0; width: 1140px; height: 300px;">
+                <!-- Slides Container -->
+                <div u="slides"
+                     style="cursor: move; position: absolute; overflow: hidden; left: 0; top: 0; width: 1140px; height: 300px;">
+                    <div>
+                        <a u=image href=""><img src="img/02.jpg"/></a>
+
+                        <div u=thumb>lorem ipsum
+                        </div>
+                    </div>
+                    <div>
+                        <a u=image href=""><img src="img/01.jpg"/></a>
+
+                        <div u="thumb"> lorem ipsum
+                        </div>
+                    </div>
+                </div>
+                <div u="thumbnavigator" style="position: absolute; bottom: 0; right: 0; height:35px; width: 700px;">
+                    <div
+                            style="filter: alpha(opacity=30); opacity:0.3; position: absolute; display: block; background-color: #000000; top: 0; left: 0; width: 100%; height: 100%;"></div>
+
+                    <div u="slides">
+                        <div u="prototype" style="POSITION: absolute; WIDTH: 700px; HEIGHT: 35px; TOP: 0; right: 0;">
+                            <thumbnailtemplate
+                                    style="POSITION: absolute; WIDTH: 100%; HEIGHT: 100%; TOP: 0; LEFT: 0; color:#fff; line-height: 35px; font-size:20px; padding-left:10px;"></thumbnailtemplate>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-1"></div>
+
+        <div class="col-md-7">
+            <div class="post">
+                <h1>super post</h1>
+                <span>
+                    <i class="glyphicon glyphicon-calendar"></i> 8 listopada
+                    <i class="glyphicon glyphicon-user"></i> autor <u>super</u>
+                    <i class="glyphicon glyphicon-user"></i> autor <u>super</u>
+                    <i class="glyphicon glyphicon-user"></i> autor <u>super</u>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A atque consequuntur culpa debitis dolorum
+            esse
+            fugiat
+            ipsam iusto nemo nostrum, officiis, recusandae sed sint temporibus vero. Itaque nam ut veniam?
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+
+
+</div>
+
+<div class="post">
+</div>
+
+</body>
+</html>
