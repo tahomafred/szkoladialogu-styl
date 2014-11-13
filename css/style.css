@@ -4,11 +4,11 @@
 
 .navbar-nav > .active > a {
     color: white;
-    background-color: #0587C1 !important;
+    background-color: #022D40 !important;
 }
 
 .navbar-default {
-    background-color: #00ADD9;
+    background-color: #2980b9;
     border-radius: 0;
 }
 
